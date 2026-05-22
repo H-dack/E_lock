@@ -1,6 +1,6 @@
 const words = [
-  { en: "confirm", jp: "確認する" },
-  { en: "state", jp: "述べる" },
+  { en: "appropriate", jp: "適切な" },
+  { en: "ingredient", jp: "食材" },
   { en: "process", jp: "処理する" },
   { en: "accept", jp: "受け入れる" },
   { en: "approve", jp: "承認する" },
@@ -29,7 +29,13 @@ const words = [
   { en: "imply", jp: "暗示する" },
   { en: "agenda", jp: "議題" },
   { en: "appropriate", jp: "適切な" },
-  { en: "certification", jp: "認定証" }
+  { en: "certification", jp: "認定証" },
+  { en: "beverage", jp: "飲料" },
+  { en: "lease", jp: "賃貸借" },
+  { en: "grocery", jp: "食品雑貨" },
+  { en: "inspect", jp: "検査する" },
+  { en: "appliance", jp: "電化製品" },
+  { en: "approximately", jp: "おおよそ" }
 ];
 
 let current = 0;
