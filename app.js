@@ -43,40 +43,104 @@ let score = 0;
 
 next();
 
+/* ---------------------------
+   次の問題を出す
+----------------------------*/
 function next() {
   current = Math.floor(Math.random() * words.length);
 
   document.getElementById("quiz").innerText =
     "英語: " + words[current].en;
+
+  document.getElementById("answer").value = "";
+  document.getElementById("result").innerHTML = "";
 }
 
+/* ---------------------------
+   回答チェック
+----------------------------*/
 function check() {
   let ans = document.getElementById("answer").value;
 
   if (ans === words[current].jp) {
     score++;
-    document.getElementById("result").innerText = "正解！";
-  } else {
-    document.getElementById("result").innerHTML =
-  `
-  <div>
-  不正解</p>
-    <p>英語: ${words[current].en}</p>
-    <p>日本語: ${words[current].jp}</p>
-  </div>
-  `;
-  }
 
-  document.getElementById("answer").value = "";
+    document.getElementById("result").innerHTML = `
+      <div>
+        <p>正解！</p>
+        <p>${words[current].en} = ${words[current].jp}</p>
+      </div>
+    `;
+  } else {
+    document.getElementById("result").innerHTML = `
+      <div>
+        <p>不正解</p>
+        <p>英語: ${words[current].en}</p>
+        <p>日本語: ${words[current].jp}</p>
+      </div>
+    `;
+  }
 
   document.getElementById("progress").innerText =
     score + "/5";
 
+  /* ---------------------------
+     5問正解で終了画面
+  ----------------------------*/
   if (score >= 5) {
-    document.body.innerHTML =
-      "<h1>解除完了！</h1>";
+    document.body.innerHTML = `
+      <div class="container">
+
+        <h1>解除完了！</h1>
+
+        <button onclick="restartQuiz()">
+          もう1回やる
+        </button>
+
+        <button onclick="closePage()">
+          サイトを閉じる
+        </button>
+
+      </div>
+    `;
     return;
   }
 
   next();
+}
+
+/* ---------------------------
+   もう一回やる（リセット）
+----------------------------*/
+function restartQuiz() {
+  score = 0;
+
+  document.body.innerHTML = `
+    <div class="container">
+
+      <h1>英単語クイズ</h1>
+
+      <div id="quiz"></div>
+
+      <input id="answer" placeholder="日本語を入力">
+
+      <button onclick="check()">回答</button>
+
+      <p id="result"></p>
+
+      <p id="progress"></p>
+
+    </div>
+  `;
+
+  setTimeout(() => {
+    next();
+  }, 50);
+}
+
+/* ---------------------------
+   サイト終了（疑似終了）
+----------------------------*/
+function closePage() {
+  window.location.href = "about:blank";
 }
