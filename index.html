@@ -1,97 +1,120 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
+
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>英単語クイズロック</title>
+
   <style>
 
-body {
-  margin: 0;
-  font-family: sans-serif;
-  background: #111;
-  color: white;
+    body {
+      margin: 0;
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
+      font-family: sans-serif;
 
-  height: 100vh;
-}
+      background: #111;
+      color: white;
 
-.container {
-  width: 90%;
-  max-width: 400px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
 
-  text-align: center;
-}
+      height: 100vh;
+    }
 
-h1 {
-  margin-bottom: 40px;
-}
+    .container {
+      width: 90%;
+      max-width: 400px;
 
-#quiz {
-  font-size: 2rem;
-  margin-bottom: 30px;
-}
+      text-align: center;
+    }
 
-input {
-  width: 100%;
-  padding: 15px;
+    h1 {
+      margin-bottom: 40px;
+    }
 
-  font-size: 1.2rem;
+    #quiz {
+      font-size: 2rem;
 
-  border-radius: 10px;
-  border: none;
+      margin-bottom: 30px;
+    }
 
-  margin-bottom: 20px;
+    input {
+      width: 100%;
 
-  box-sizing: border-box;
-}
+      padding: 15px;
 
-button {
-  width: 100%;
-  padding: 15px;
+      font-size: 1.2rem;
 
-  font-size: 1.2rem;
+      border-radius: 10px;
+      border: none;
 
-  border: none;
-  border-radius: 10px;
+      margin-bottom: 20px;
 
-  cursor: pointer;
-}
+      box-sizing: border-box;
+    }
 
-#result {
-  margin-top: 30px;
-  font-size: 1.2rem;
-  min-height: 60px;
-}
+    button {
+      width: 100%;
 
-#progress {
-  margin-top: 20px;
-  opacity: 0.8;
-}
+      padding: 15px;
 
-</style>
+      font-size: 1.2rem;
+
+      border: none;
+      border-radius: 10px;
+
+      cursor: pointer;
+
+      margin-top: 10px;
+    }
+
+    #result {
+      margin-top: 30px;
+
+      font-size: 1.2rem;
+
+      min-height: 80px;
+    }
+
+    #progress {
+      margin-top: 20px;
+
+      opacity: 0.8;
+    }
+
+  </style>
 </head>
+
 <body>
 
-<div id="app">
+  <div class="container">
 
-  <div id="quiz"></div>
+    <h1>英単語クイズ</h1>
 
-  <input id="answer" placeholder="日本語を入力">
+    <div id="quiz"></div>
 
-  <button onclick="check()">回答</button>
+    <input
+      id="answer"
+      placeholder="日本語を入力"
+    >
 
-  <p id="result"></p>
+    <button onclick="check()">
+      回答
+    </button>
 
-  <p id="progress"></p>
+    <p id="result"></p>
 
-  <div id="end"></div>
+    <p id="progress"></p>
 
-</div>
+    <div id="end"></div>
 
-<script src="app.js"></script>
+  </div>
+
+  <script src="app.js"></script>
 
 </body>
+
 </html>
