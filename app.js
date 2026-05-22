@@ -51,8 +51,14 @@ function check() {
     score++;
     document.getElementById("result").innerText = "正解！";
   } else {
-    document.getElementById("result").innerText =
-      "不正解 正解: " + words[current].jp;
+    document.getElementById("result").innerHTML =
+  `
+  <div>
+  不正解</p>
+    <p>英語: ${words[current].en}</p>
+    <p>日本語: ${words[current].jp}</p>
+  </div>
+  `;
   }
 
   document.getElementById("answer").value = "";
