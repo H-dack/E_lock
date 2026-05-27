@@ -66,17 +66,40 @@ const partQuestions = [
   {word: "prior to", answer: "前置詞"},
   {word: "as of", answer: "前置詞"},
   {word: "such as", answer: "前置詞"},
-  {word: "whereas", answer: "接続詞"}
+  {word: "during", answer: "前置詞"},
+  {word: "becouse of", answer: "前置詞"},
+  {word: "due to", answer: "前置詞"},
+  {word: "despite", answer: "前置詞"},
+  {word: "in spite of", answer: "前置詞"},
+  {word: "whereas", answer: "接続詞"},
+  {word: "when", answer: "接続詞"},
+  {word: "while", answer: "接続詞"},
+  {word: "as soon as", answer: "接続詞"},
+  {word: "once", answer: "接続詞"},
+  {word: "if", answer: "接続詞"},
+  {word: "unless", answer: "接続詞"},
+  {word: "becouse", answer: "接続詞"},
+  {word: "now that", answer: "接続詞"},
+  {word: "so that", answer: "接続詞"},
+  {word: "though, asthough, even though", answer: "接続詞"},
+  {word: "whenever", answer: "接続詞"},
+  {word: "even if", answer: "接続詞"},
+  {word: "provided that", answer: "接続詞"},
+  {word: "in case", answer: "接続詞"},
+  {word: "lockily", answer: "副詞"},
+  {word: "however", answer: "副詞"},
+  {word: "therefore", answer: "副詞"},
+  {word: "if not", answer: "その他"}
 ];
 
 /* ---------------------------
    品詞の四択
 ----------------------------*/
 const partChoices = [
-  "名詞",
-  "動詞",
-  "形容詞",
-  "副詞"
+  "接続詞",
+  "前置詞",
+  "副詞",
+  "その他"
 ];
 
 let mode = "";
