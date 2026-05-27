@@ -1,4 +1,4 @@
-const  = [
+const wordQuestions = [
   { en: "appropriate", jp: "適切な" },
   { en: "ingredient", jp: "食材" },
   { en: "process", jp: "処理する" },
