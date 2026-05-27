@@ -38,12 +38,16 @@ const words = [
 ];
 
 let current = 0;
-let score = 0;
 
 /* ---------------------------
-   正解済み問題を保存
+   未正解リスト
 ----------------------------*/
-let clearedIndexes = [];
+let remainingIndexes = [];
+
+/* 最初に全部入れる */
+for (let i = 0; i < words.length; i++) {
+  remainingIndexes.push(i);
+}
 
 /* ---------------------------
    最初の問題
@@ -55,8 +59,10 @@ next();
 ----------------------------*/
 function next() {
 
-  /* 全問正解済みなら終了 */
-  if (clearedIndexes.length === words.length) {
+  /* 全問クリア */
+  if (remainingIndexes.length === 0) {
+
+    document.getElementById("quiz").innerText = "";
 
     document.getElementById("end").innerHTML = `
       <h1>全問クリア！</h1>
@@ -73,22 +79,11 @@ function next() {
     return;
   }
 
-  /* 未正解の問題だけ抽出 */
-  let remainingIndexes = [];
-
-  for (let i = 0; i < words.length; i++) {
-
-    if (!clearedIndexes.includes(i)) {
-      remainingIndexes.push(i);
-    }
-
-  }
-
   /* 未正解からランダム出題 */
-  current =
-    remainingIndexes[
-      Math.floor(Math.random() * remainingIndexes.length)
-    ];
+  let randomIndex =
+    Math.floor(Math.random() * remainingIndexes.length);
+
+  current = remainingIndexes[randomIndex];
 
   document.getElementById("quiz").innerText =
     "英語: " + words[current].en;
@@ -96,6 +91,10 @@ function next() {
   document.getElementById("answer").value = "";
 
   document.getElementById("result").innerHTML = "";
+
+  /* 進捗 */
+  document.getElementById("progress").innerText =
+    "残り " + remainingIndexes.length + " 問";
 }
 
 /* ---------------------------
@@ -109,13 +108,6 @@ function check() {
   /* 正解 */
   if (ans === words[current].jp) {
 
-    score++;
-
-    /* 正解済みに追加 */
-    if (!clearedIndexes.includes(current)) {
-      clearedIndexes.push(current);
-    }
-
     document.getElementById("result").innerHTML = `
       <div>
         <p>正解！</p>
@@ -127,6 +119,12 @@ function check() {
         </p>
       </div>
     `;
+
+    /* 正解した問題をリストから削除 */
+    remainingIndexes =
+      remainingIndexes.filter(
+        index => index !== current
+      );
 
   }
 
@@ -148,28 +146,8 @@ function check() {
         </p>
       </div>
     `;
-  }
 
-  /* 進捗表示 */
-  document.getElementById("progress").innerText =
-    score + "/" + words.length;
-
-  /* 5問正解 */
-  if (score >= 5) {
-
-    document.getElementById("end").innerHTML = `
-      <h1>解除完了！</h1>
-
-      <button onclick="restartQuiz()">
-        もう1回やる
-      </button>
-
-      <button onclick="closePage()">
-        サイトを閉じる
-      </button>
-    `;
-
-    return;
+    /* 不正解はそのまま残る */
   }
 
   /* 次の問題 */
@@ -183,10 +161,11 @@ function check() {
 ----------------------------*/
 function restartQuiz() {
 
-  score = 0;
+  remainingIndexes = [];
 
-  /* 正解履歴リセット */
-  clearedIndexes = [];
+  for (let i = 0; i < words.length; i++) {
+    remainingIndexes.push(i);
+  }
 
   document.getElementById("result").innerHTML = "";
 
