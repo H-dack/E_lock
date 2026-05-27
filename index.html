@@ -3,17 +3,16 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
 
-  <title>英単語クイズロック</title>
+  <title>英語クイズ</title>
 
   <style>
 
     body {
       margin: 0;
-
       font-family: sans-serif;
-
       background: #111;
       color: white;
 
@@ -27,70 +26,38 @@
     .container {
       width: 90%;
       max-width: 400px;
-
       text-align: center;
     }
 
-    h1 {
-      margin-bottom: 40px;
-    }
-
-    #quiz {
-      font-size: 2rem;
-
-      margin-bottom: 30px;
-    }
-
+    button,
     input {
+
       width: 100%;
 
       padding: 15px;
 
-      font-size: 1.2rem;
+      margin-top: 10px;
 
-      border-radius: 10px;
       border: none;
+      border-radius: 10px;
 
-      margin-bottom: 20px;
+      font-size: 1rem;
 
       box-sizing: border-box;
     }
 
-    button {
-      width: 100%;
-
-      padding: 15px;
-
-      font-size: 1.2rem;
-
-      border: none;
-      border-radius: 10px;
-
-      cursor: pointer;
-
-      margin-top: 10px;
-    }
-
-    #result {
-      margin-top: 30px;
-
-      font-size: 1.2rem;
-
-      min-height: 80px;
-    }
-
-    #progress {
-      margin-top: 20px;
-
-      opacity: 0.8;
+    #quiz {
+      font-size: 2rem;
+      margin: 30px 0;
     }
 
   </style>
+
 </head>
 
 <body>
 
-  <!-- モード選択 -->
+  <!-- メニュー -->
   <div id="menu" class="container">
 
     <h1>英語クイズ</h1>
@@ -105,28 +72,23 @@
 
   </div>
 
-  <!-- クイズ本体 -->
+  <!-- クイズ -->
   <div
     id="quizArea"
     class="container"
-    style="display: none;"
+    style="display:none;"
   >
-
-    <h1 id="quizTitle"></h1>
 
     <div id="quiz"></div>
 
-    <!-- 単語問題用 -->
     <input
       id="answer"
-      placeholder="日本語を入力"
-      autocomplete="off"
+      placeholder="日本語"
     >
 
-    <!-- 品詞問題用 -->
     <div id="choices"></div>
 
-    <button onclick="check()">
+    <button id="answerButton" onclick="check()">
       回答
     </button>
 
