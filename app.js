@@ -69,9 +69,7 @@ let mode = "";
 let current = 0;
 let remainingIndexes = [];
 
-/* ---------------------------
-   単語問題開始
-----------------------------*/
+/* ---------------- */
 function startWordQuiz() {
 
   mode = "word";
@@ -80,9 +78,7 @@ function startWordQuiz() {
 
 }
 
-/* ---------------------------
-   品詞問題開始
-----------------------------*/
+/* ---------------- */
 function startPartQuiz() {
 
   mode = "part";
@@ -91,9 +87,7 @@ function startPartQuiz() {
 
 }
 
-/* ---------------------------
-   共通開始処理
-----------------------------*/
+/* ---------------- */
 function startQuiz(list) {
 
   document.getElementById("menu").style.display =
@@ -108,16 +102,11 @@ function startQuiz(list) {
     remainingIndexes.push(i);
   }
 
-  document.getElementById("result").innerHTML = "";
-  document.getElementById("end").innerHTML = "";
-
   next();
 
 }
 
-/* ---------------------------
-   次の問題
-----------------------------*/
+/* ---------------- */
 function next() {
 
   let list =
@@ -128,58 +117,62 @@ function next() {
   /* 全問クリア */
   if (remainingIndexes.length === 0) {
 
-    document.getElementById("quiz").innerText = "";
+    document.getElementById("quiz").innerText =
+      "全問クリア！";
 
-    document.getElementById("choices").innerHTML = "";
+    document.getElementById("choices").innerHTML =
+      "";
 
     document.getElementById("answer").style.display =
       "none";
 
-    document.getElementById("end").innerHTML = `
-      <h1>全問クリア！</h1>
-
-      <button onclick="restartQuiz()">
-        もう1回やる
-      </button>
-    `;
+    document.getElementById("answerButton").style.display =
+      "none";
 
     return;
   }
 
   /* ランダム */
-  let randomIndex =
+  let rand =
     Math.floor(Math.random() * remainingIndexes.length);
 
-  current = remainingIndexes[randomIndex];
+  current = remainingIndexes[rand];
 
-  document.getElementById("result").innerHTML = "";
+  document.getElementById("result").innerText = "";
 
-  /* ---------------------------
-     単語問題
-  ----------------------------*/
+  document.getElementById("progress").innerText =
+    "残り " + remainingIndexes.length + " 問";
+
+  /* 単語問題 */
   if (mode === "word") {
 
     document.getElementById("quiz").innerText =
-      "英語: " + list[current].en;
+      list[current].en;
 
     document.getElementById("answer").style.display =
       "block";
 
-    document.getElementById("answer").value = "";
+    document.getElementById("answerButton").style.display =
+      "block";
 
-    document.getElementById("choices").innerHTML = "";
+    document.getElementById("choices").innerHTML =
+      "";
+
+    document.getElementById("answer").value =
+      "";
 
   }
 
-  /* ---------------------------
-     品詞問題
-  ----------------------------*/
+  /* 品詞問題 */
   else {
 
     document.getElementById("quiz").innerText =
       list[current].word;
 
     document.getElementById("answer").style.display =
+      "none";
+
+    document.getElementById("answerButton").style.display =
       "none";
 
     let html = "";
@@ -199,15 +192,9 @@ function next() {
 
   }
 
-  /* 進捗 */
-  document.getElementById("progress").innerText =
-    "残り " + remainingIndexes.length + " 問";
-
 }
 
-/* ---------------------------
-   単語問題回答
-----------------------------*/
+/* ---------------- */
 function check() {
 
   let ans =
@@ -220,9 +207,7 @@ function check() {
 
 }
 
-/* ---------------------------
-   品詞問題回答
-----------------------------*/
+/* ---------------- */
 function checkPart(choice) {
 
   let correct =
@@ -232,24 +217,14 @@ function checkPart(choice) {
 
 }
 
-/* ---------------------------
-   共通判定
-----------------------------*/
+/* ---------------- */
 function judge(isCorrect, correctAnswer) {
 
-  let list =
-    mode === "word"
-      ? wordQuestions
-      : partQuestions;
-
-  /* 正解 */
   if (isCorrect) {
 
-    document.getElementById("result").innerHTML = `
-      <p>正解！</p>
-    `;
+    document.getElementById("result").innerText =
+      "正解！";
 
-    /* リストから削除 */
     remainingIndexes =
       remainingIndexes.filter(
         index => index !== current
@@ -257,41 +232,15 @@ function judge(isCorrect, correctAnswer) {
 
   }
 
-  /* 不正解 */
   else {
 
-    document.getElementById("result").innerHTML = `
-      <p>不正解</p>
-
-      <p>
-        正解:
-        ${correctAnswer}
-      </p>
-    `;
+    document.getElementById("result").innerText =
+      "不正解 正解: " + correctAnswer;
 
   }
 
   setTimeout(() => {
     next();
-  }, 1200);
-
-}
-
-/* ---------------------------
-   リスタート
-----------------------------*/
-function restartQuiz() {
-
-  document.getElementById("menu").style.display =
-    "block";
-
-  document.getElementById("quizArea").style.display =
-    "none";
-
-  document.getElementById("result").innerHTML = "";
-
-  document.getElementById("progress").innerText = "";
-
-  document.getElementById("end").innerHTML = "";
+  }, 1000);
 
 }
