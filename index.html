@@ -99,6 +99,7 @@
     <input
       id="answer"
       placeholder="日本語を入力"
+      autocomplete="off"
     >
 
     <button onclick="check()">
@@ -114,6 +115,21 @@
   </div>
 
   <script src="app.js"></script>
+
+  <script>
+
+    /* Enterキーで回答 */
+    document
+      .getElementById("answer")
+      .addEventListener("keydown", function(e) {
+
+        if (e.key === "Enter") {
+          check();
+        }
+
+      });
+
+  </script>
 
 </body>
 
