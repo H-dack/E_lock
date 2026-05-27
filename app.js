@@ -37,32 +37,103 @@ const words = [
   { en: "approximately", jp: "おおよそ" }
 ];
 
-let current = 0;
+/* ---------------------------
+   品詞問題
+----------------------------*/
+const partQuestions = [
+  {
+    word: "appropriate",
+    answer: "形容詞"
+  },
+  {
+    word: "approve",
+    answer: "動詞"
+  },
+  {
+    word: "immediately",
+    answer: "副詞"
+  }
+];
 
 /* ---------------------------
-   未正解リスト
+   品詞の四択
 ----------------------------*/
+const partChoices = [
+  "名詞",
+  "動詞",
+  "形容詞",
+  "副詞"
+];
+
+let mode = "";
+let current = 0;
 let remainingIndexes = [];
 
-/* 最初に全部入れる */
-for (let i = 0; i < words.length; i++) {
-  remainingIndexes.push(i);
+/* ---------------------------
+   単語問題開始
+----------------------------*/
+function startWordQuiz() {
+
+  mode = "word";
+
+  startQuiz(wordQuestions);
+
 }
 
 /* ---------------------------
-   最初の問題
+   品詞問題開始
 ----------------------------*/
-next();
+function startPartQuiz() {
+
+  mode = "part";
+
+  startQuiz(partQuestions);
+
+}
+
+/* ---------------------------
+   共通開始処理
+----------------------------*/
+function startQuiz(list) {
+
+  document.getElementById("menu").style.display =
+    "none";
+
+  document.getElementById("quizArea").style.display =
+    "block";
+
+  remainingIndexes = [];
+
+  for (let i = 0; i < list.length; i++) {
+    remainingIndexes.push(i);
+  }
+
+  document.getElementById("result").innerHTML = "";
+  document.getElementById("end").innerHTML = "";
+
+  next();
+
+}
 
 /* ---------------------------
    次の問題
 ----------------------------*/
 function next() {
 
+  let list =
+    mode === "word"
+      ? wordQuestions
+      : partQuestions;
+
   /* 全問クリア */
   if (remainingIndexes.length === 0) {
 
     document.getElementById("quiz").innerText = "";
+
+    document.getElementById("choices").innerHTML = "";
+
+    document.getElementById("answer").style.display =
+      "none";
 
     document.getElementById("end").innerHTML = `
       <h1>全問クリア！</h1>
@@ -70,57 +141,115 @@ function next() {
       <button onclick="restartQuiz()">
         もう1回やる
       </button>
-
-      <button onclick="closePage()">
-        サイトを閉じる
-      </button>
     `;
 
     return;
   }
 
-  /* 未正解からランダム出題 */
+  /* ランダム */
   let randomIndex =
     Math.floor(Math.random() * remainingIndexes.length);
 
   current = remainingIndexes[randomIndex];
 
-  document.getElementById("quiz").innerText =
-    "英語: " + words[current].en;
-
-  document.getElementById("answer").value = "";
-
   document.getElementById("result").innerHTML = "";
+
+  /* ---------------------------
+     単語問題
+  ----------------------------*/
+  if (mode === "word") {
+
+    document.getElementById("quiz").innerText =
+      "英語: " + list[current].en;
+
+    document.getElementById("answer").style.display =
+      "block";
+
+    document.getElementById("answer").value = "";
+
+    document.getElementById("choices").innerHTML = "";
+
+  }
+
+  /* ---------------------------
+     品詞問題
+  ----------------------------*/
+  else {
+
+    document.getElementById("quiz").innerText =
+      list[current].word;
+
+    document.getElementById("answer").style.display =
+      "none";
+
+    let html = "";
+
+    for (let choice of partChoices) {
+
+      html += `
+        <button onclick="checkPart('${choice}')">
+          ${choice}
+        </button>
+      `;
+
+    }
+
+    document.getElementById("choices").innerHTML =
+      html;
+
+  }
 
   /* 進捗 */
   document.getElementById("progress").innerText =
     "残り " + remainingIndexes.length + " 問";
+
 }
 
 /* ---------------------------
-   回答チェック
+   単語問題回答
 ----------------------------*/
 function check() {
 
   let ans =
     document.getElementById("answer").value.trim();
 
+  let correct =
+    wordQuestions[current].jp;
+
+  judge(ans === correct, correct);
+
+}
+
+/* ---------------------------
+   品詞問題回答
+----------------------------*/
+function checkPart(choice) {
+
+  let correct =
+    partQuestions[current].answer;
+
+  judge(choice === correct, correct);
+
+}
+
+/* ---------------------------
+   共通判定
+----------------------------*/
+function judge(isCorrect, correctAnswer) {
+
+  let list =
+    mode === "word"
+      ? wordQuestions
+      : partQuestions;
+
   /* 正解 */
-  if (ans === words[current].jp) {
+  if (isCorrect) {
 
     document.getElementById("result").innerHTML = `
-      <div>
-        <p>正解！</p>
-
-        <p>
-          ${words[current].en}
-          =
-          ${words[current].jp}
-        </p>
-      </div>
+      <p>正解！</p>
     `;
 
-    /* 正解した問題をリストから削除 */
+    /* リストから削除 */
     remainingIndexes =
       remainingIndexes.filter(
         index => index !== current
@@ -132,28 +261,20 @@ function check() {
   else {
 
     document.getElementById("result").innerHTML = `
-      <div>
-        <p>不正解</p>
+      <p>不正解</p>
 
-        <p>
-          英語:
-          ${words[current].en}
-        </p>
-
-        <p>
-          日本語:
-          ${words[current].jp}
-        </p>
-      </div>
+      <p>
+        正解:
+        ${correctAnswer}
+      </p>
     `;
 
-    /* 不正解はそのまま残る */
   }
 
-  /* 次の問題 */
   setTimeout(() => {
     next();
   }, 1200);
+
 }
 
 /* ---------------------------
@@ -161,26 +282,16 @@ function check() {
 ----------------------------*/
 function restartQuiz() {
 
-  remainingIndexes = [];
+  document.getElementById("menu").style.display =
+    "block";
 
-  for (let i = 0; i < words.length; i++) {
-    remainingIndexes.push(i);
-  }
+  document.getElementById("quizArea").style.display =
+    "none";
 
   document.getElementById("result").innerHTML = "";
 
   document.getElementById("progress").innerText = "";
 
   document.getElementById("end").innerHTML = "";
-
-  next();
-}
-
-/* ---------------------------
-   疑似終了
-----------------------------*/
-function closePage() {
-
-  window.location.href = "about:blank";
 
 }
