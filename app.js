@@ -5,54 +5,68 @@ const wordQuestions = [
   { en: "accept", jp: "受け入れる" },
   { en: "approve", jp: "承認する" },
   { en: "procedure", jp: "手続き" },
-  { en: "property", jp: "不動産" },
   { en: "distribute", jp: "分配する" },
   { en: "immediately", jp: "すぐに" },
   { en: "expense", jp: "費用" },
   { en: "insurance", jp: "保険" },
-  { en: "district", jp: "地区" },
-  { en: "generous", jp: "寛大な" },
   { en: "aspect", jp: "側面" },
   { en: "involved", jp: "関わった" },
   { en: "represent", jp: "代表を務める" },
   { en: "institution", jp: "機関" },
   { en: "assure", jp: "保証する" },
-  { en: "permit", jp: "許可証" },
   { en: "relatively", jp: "比較的" },
   { en: "regard", jp: "みなす" },
-  { en: "commission (V)", jp: "委託する" },
-  { en: "commission (N)", jp: "委員会" },
   { en: "ensure", jp: "保証する" },
   { en: "eligible", jp: "資格がある" },
   { en: "extensive", jp: "詳細な" },
   { en: "assign", jp: "割り当てる" },
   { en: "imply", jp: "暗示する" },
-  { en: "agenda", jp: "議題" },
   { en: "certification", jp: "認定証" },
   { en: "beverage", jp: "飲料" },
   { en: "lease", jp: "賃貸借" },
-  { en: "grocery", jp: "食品雑貨" },
   { en: "inspect", jp: "検査する" },
   { en: "appliance", jp: "電化製品" },
-  { en: "approximately", jp: "おおよそ" }
+  { en: "approximately", jp: "おおよそ" },
+  { en: "hold X accountable", jp: "Xに責任があると考える" },
+  { en: "omission", jp: "除外" },
+  { en: "deliberate", jp: "故意の" },
+  { en: "anticipate X", jp: "Xを楽しみに待つ" },
+  { en: "look as if SV", jp: "SVのようだ" },
+  { en: "underneath", jp: "Xの下に" },
+  { en: "consistent", jp: "一貫性のある" },
+  { en: "credit X to Y", jp: "XをYのおかげとする" },
+  { en: "in accordance with X", jp: " Xに従って" },
+  { en: "evoke", jp: "呼び起こす" },
+  { en: "adequate", jp: "十分な" },
+  { en: "astound", jp: "愕然とする" },
+  { en: "relief", jp: "安らぎ" },
+  { en: "barely", jp: "ほとんど～ない" },
+  { en: "turn down X", jp: "Xを却下する" },
+  { en: "stranded", jp: "立ち往生した" },
+  { en: "across from X", jp: "Xの向かいに" },
+  { en: "provided to SV", jp: "SVという条件で" },
+  { en: "futhermore", jp: "さらに" },
+  { en: "besides X", jp: "Xに加えて" },
+  { en: "assign", jp: "割り当てる" },
+  { en: "in order that SV", jp: "SVするために" },
+  { en: "whenever SV", jp: "SVする時はいつでも" },
+  { en: "evaluate", jp: "評価する" },
+  { en: " thorough", jp: "徹底的な" },
+  { en: "via", jp: "を経由して" },
+  { en: "substancial", jp: "かなりの" },
+  { en: "acquire", jp: "買収する" },
 ];
 
 /* ---------------------------
    品詞問題
 ----------------------------*/
 const partQuestions = [
-  {
-    word: "appropriate",
-    answer: "形容詞"
-  },
-  {
-    word: "approve",
-    answer: "動詞"
-  },
-  {
-    word: "immediately",
-    answer: "副詞"
-  }
+  {word: "as of", answer: "前置詞"},
+  {word: "such as", answer: "前置詞"},
+  {word: "prior to", answer: "前置詞"},
+  {word: "as of", answer: "前置詞"},
+  {word: "such as", answer: "前置詞"},
+  {word: "whereas", answer: "接続詞"}
 ];
 
 /* ---------------------------
