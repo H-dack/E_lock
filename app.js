@@ -55,6 +55,7 @@ const wordQuestions = [
   { en: "via", jp: "を経由して" },
   { en: "substancial", jp: "かなりの" },
   { en: "acquire", jp: "買収する" },
+  { en: "above X", jp: "Xより上の" },
 ];
 
 /* ---------------------------
